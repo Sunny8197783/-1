@@ -6,8 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mess - It's a mEsS</title>
 <style>
-/* CSS 기초인 전체 여백 초기화(*)를 빼먹음 */
-
+/* 기본 여백 무시 (브라우저 기본 여백 때문에 전체적으로 어설퍼짐) */
 body {
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
     url('https://i.pinimg.com/474x/14/1d/16/141d16cae092c1c776097b72aa589d7d.jpg');
@@ -18,40 +17,29 @@ body {
     font-family: 'Share Tech Mono', monospace;
 }
 
-/* header 태그 대신 div를 쓰고 여백을 따로따로 줌 */
-.top-name { text-align: center; margin-top: 80px; }
-.top-title {
+/* 제목이 가운데 정렬되지 않고 왼쪽으로 애매하게 치우침 */
+header {
+    margin-top: 50px;
+    margin-left: 20px;
+}
+h1 {
     font-size: 2.5rem;
     text-shadow: 0 0 10px #952020;
     font-family: 'Orbitron', sans-serif;
-    text-align: center;
+    margin-bottom: 0;
 }
-.top-desc { text-align: center; margin-bottom: 40px; }
+.subtitle {
+    margin-left: 50px; /* 제목과 부제목의 줄이 안 맞음 */
+}
 
-/* 공통 클래스를 안 만들고 박스마다 똑같은 CSS를 반복해서 복붙함 (초보자 특) */
-.box-1 {
-    width: 800px;
-    margin-left: auto; margin-right: auto; /* 가운데 정렬을 매번 씀 */
+/* 박스들이 화면 중앙에 있지 않고 오른쪽으로 쏠려 있음 */
+section {
+    width: 85%; /* 화면 꽉 안 채우고 애매하게 남김 */
+    margin-left: 10%; /* 왼쪽 여백만 줘서 오른쪽으로 치우치게 만듦 */
+    margin-bottom: 20px;
     background: rgba(0,0,0,0.7);
-    padding: 25px;
-    border: 2px solid #7fff00;
-    margin-bottom: 40px;
-}
-.box-2 {
-    width: 800px;
-    margin-left: auto; margin-right: auto;
-    background: rgba(0,0,0,0.7);
-    padding: 25px;
-    border: 2px solid #7fff00;
-    margin-bottom: 40px;
-}
-.box-3 {
-    width: 800px;
-    margin-left: auto; margin-right: auto;
-    background: rgba(0,0,0,0.7);
-    padding: 25px;
-    border: 2px solid #7fff00;
-    margin-bottom: 40px;
+    padding: 10px 10px 40px 30px; /* 위아래좌우 여백이 엉망진창 */
+    border: 3px solid #7fff00;
 }
 
 h2 {
@@ -59,182 +47,167 @@ h2 {
     display: inline-block;
     padding-bottom: 5px;
     text-shadow: 0 0 10px #952020;
-    margin-bottom: 15px;
+    margin-top: 30px;
 }
 
-/* 텍스트 색상을 인라인과 클래스 등 중구난방으로 적용함 */
-.center-text { text-align: center; color: #fff; }
-.green-bold { font-weight: bold; color: #7fff00; }
-
-ul { list-style: none; padding-left: 0; }
-li {
-    transition: 0.3s;
-    padding: 10px;
-    border-bottom: 1px solid rgba(127,255,0,0.2);
+/* 가사 박스가 가운데 정렬 안 되고 왼쪽에 딱 붙어있음 */
+.lyrics-box {
+    color: #fff;
+    line-height: 2; /* 줄간격만 쓸데없이 넓음 */
 }
-li:hover {
-    box-shadow: 0 0 20px #7fff00;
-    background: rgba(127,255,0,0.1);
-}
-
-.table-wrap {
-    width: 100%;
-    background: #7fff00;
-    padding: 15px;
-    margin-bottom: 30px;
-    box-sizing: border-box;
-}
-table { width: 100%; color: #000; }
-th {
-    font-size: 1.1rem;
-    background: rgba(127,255,0,0.8);
-    padding: 10px;
-}
-td { font-size: 0.9rem; padding: 10px; }
-tr { border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
-tr:hover { transition: 0.3s; background: rgba(0, 0, 0, 0.2); }
-
-/* 궁극의 무기 flexbox를 몰라서 과거의 방식인 float: left로 억지로 끼워 맞춤 */
-.tracks-area { overflow: hidden; }
-.track-item {
-    float: left;
-    width: 48%;
-    background: rgba(0,0,0,0.8);
-    border: 1px solid rgba(127,255,0,0.4);
-    padding: 15px;
-    text-align: center;
-    transition: 0.3s;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-}
-/* flex의 gap을 몰라서 왼쪽 애들한테만 오른쪽 여백을 수동으로 줌 */
-.margin-right { margin-right: 4%; }
-
-.track-item:hover {
-    box-shadow: 0 0 20px #7fff00;
-    background: rgba(127,255,0,0.1);
-}
-.track-img {
-    width: 100%;
-    height: 180px;
-    /* object-fit: cover; 가 없어서 화면 비율에 따라 이미지가 미세하게 찌그러질 수 있음 */
-}
-
-/* 홀수라 남는 마지막 하나를 정렬하려고 억지로 float를 끄고 따로 코드를 짬 */
-.last-track {
-    float: none;
-    display: block;
-    width: 300px;
-    margin: 0 auto; 
-    clear: both;
-}
-
-.bottom-area {
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-.btn {
-    border: 1px solid #7fff00;
-    background: transparent;
+.highlight {
+    font-weight: bold;
     color: #7fff00;
-    padding: 10px 30px;
-    cursor: pointer;
-    font-family: inherit;
+    margin-left: 30px; /* 특정 가사만 뜬금없이 들여쓰기 됨 */
 }
-.btn:hover {
+
+/* 리스트 간격 엉성함 */
+#point-list li {
+    padding: 15px 0;
+    border-bottom: 1px dashed rgba(127,255,0,0.5);
+}
+
+/* 테이블이 박스 크기에 안 맞고 애매하게 작으며, 내용이 다 왼쪽으로 쏠림 */
+.playlist-table table {
+    width: 70%;
     background: #7fff00;
     color: #000;
-    box-shadow: 0 0 20px #7fff00;
-    transition: 0.3s;
+    border-spacing: 2px;
+}
+.playlist-table th {
+    background: rgba(127,255,0,0.8);
+    text-align: left; /* 표 제목이 가운데 정렬 안 됨 */
+    padding: 5px;
+}
+.playlist-table td {
+    text-align: left; /* 데이터도 다 왼쪽 쏠림 */
+    padding: 5px;
+}
+
+/* 앨범 정렬의 대환장 파티 */
+.track-grid {
+    margin-top: 30px;
+}
+.track {
+    display: inline-block;
+    width: 40%; /* 2개씩 배치되는데 오른쪽에 텅 빈 공간이 남음 */
+    background: rgba(0,0,0,0.8);
+    border: 1px solid rgba(127,255,0,0.4);
+    padding: 5px; /* 패딩이 좁아서 답답함 */
+    margin-right: 15px;
+    margin-bottom: 20px;
+}
+
+/* 초보자 특: 이미지 비율 무시하고 억지로 크기 맞춤 (이미지 찌그러짐) */
+.track img {
+    width: 100%;
+    height: 250px; /* object-fit: cover가 없어서 세로로 쭉 늘어남 */
+}
+.song-title {
+    color: #fff;
+    margin-top: 10px;
+}
+
+/* 마지막 트랙을 가운데로 보내는 걸 할 줄 몰라서 그냥 세 번째 줄 왼쪽에 덩그러니 남음 */
+.center {
+    width: 60%; /* 혼자 크기가 다름 */
+}
+
+/* 버튼이 화면 맨 오른쪽 아래 구석탱이에 쏠려 있음 */
+footer {
+    text-align: right;
+    margin-right: 50px;
+    margin-bottom: 100px;
+}
+.listen-btn {
+    border: 2px solid #7fff00;
+    background: transparent;
+    color: #7fff00;
+    padding: 15px 20px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.2rem;
+}
+.listen-btn:hover {
+    background: #7fff00;
+    color: #000;
 }
 </style>
 </head>
 <body>
 
-<!-- 시맨틱 태그(header, section, footer) 없이 전부 div로 묶어버림 -->
-<div id="wrapper">
-    <div class="top-name">Mess</div>
-    <div class="top-title"><h1>EP 4집 'It's a mEsS'</h1></div>
-    <div class="top-desc">지들만의 매력으로 가득찬 플레이리스트</div>
+<header>
+    <p class="artist-name">Mess</p>
+    <h1>EP 4집 'It's a mEsS'</h1>
+    <p class="subtitle">지들만의 매력으로 가득찬 플레이리스트</p>
+</header>
 
-    <div class="box-1">
-        <div><h2>KILLING PART</h2></div>
-        <div class="center-text">
-            <p>You need to find a way</p>
-            <!-- <span>과 인라인 스타일을 섞어서 지저분하게 강조함 -->
-            <p><span class="green-bold">For what you want to say,But before tomorrow</span></p>
-            <p>Cause my friend said he'd take you home</p>
+<section id="killing">
+    <h2>KILLING PART</h2>
+    <div class="lyrics-box">
+        <p>You need to find a way</p>
+        <p class="highlight">For what you want to say,But before tomorrow</p>
+        <p>Cause my friend said he'd take you home</p>
+    </div>
+</section>
+
+<section id="point">
+    <h2>POINT</h2>
+    <ul id="point-list">
+        <li>아무 의미없이 라임만 맞춘 가사</li>
+        <li>마이웨이 마인드</li>
+    </ul>
+</section>
+
+<section id="playlist">
+    <h2>PLAYLIST</h2>
+    <div class="playlist-table">
+        <table>
+            <tr>
+                <th>Track</th>
+                <th>곡명</th>
+                <th>Time</th>
+            </tr>
+            <tr><td>01</td><td>USO</td><td>1분 42초</td></tr>
+            <tr><td>02</td><td>Dash</td><td>2분 47초</td></tr>
+            <tr><td>03</td><td>Black Tesla</td><td>2분 20초</td></tr>
+            <tr><td>04</td><td>너의 모든 순간</td><td>4분 3초</td></tr>
+            <tr><td>05</td><td>supersonic</td><td>4분 44초</td></tr>
+        </table>
+    </div>
+    
+    <div class="track-grid">
+        <div class="track">
+            <img src="https://image.bugsm.co.kr/album/images/500/3350/335088.jpg">
+            <div class="song-title">01. USO</div>
+            <div class="artist">SID</div>
+        </div>
+        <div class="track">
+            <img src="https://image.bugsm.co.kr/album/images/500/206098/20609824.jpg">
+            <div class="song-title">02. Dash</div>
+            <div class="artist">NMIXX</div>
+        </div>
+        <div class="track">
+            <img src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/085/547/757/85547757_1724997320704_1_600x600.JPG">
+            <div class="song-title">03. Black Tesla</div>
+            <div class="artist">캔드비 블루</div>
+        </div>
+        <div class="track">
+            <img src="https://image.bugsm.co.kr/album/images/500/4132/413209.jpg">
+            <div class="song-title">04. 너의 모든 순간</div>
+            <div class="artist">성시경</div>
+        </div>
+        <!-- 정렬 실패해서 덩그러니 놓이고 크기도 혼자 다른 마지막 앨범 -->
+        <div class="track center">
+            <img src="https://image.yes24.com/momo/TopCate363/MidCate02/36217987.jpg">
+            <div class="song-title">05. supersonic</div>
+            <div class="artist">Oasis</div>
         </div>
     </div>
+</section>
 
-    <div class="box-2">
-        <div><h2>POINT</h2></div>
-        <div>
-            <ul>
-                <li>아무 의미없이 라임만 맞춘 가사</li>
-                <li>마이웨이 마인드</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="box-3">
-        <div><h2>PLAYLIST</h2></div>
-        <div class="table-wrap">
-            <!-- CSS border-collapse 대신 HTML의 cellspacing="0" 속성을 씀 -->
-            <table cellspacing="0">
-                <tr>
-                    <th>Track</th>
-                    <th>곡명</th>
-                    <th>Time</th>
-                </tr>
-                <!-- CSS text-align 대신 태그에 직접 align="center"를 다 붙여넣음 -->
-                <tr align="center"><td>01</td><td>USO</td><td>1분 42초</td></tr>
-                <tr align="center"><td>02</td><td>Dash</td><td>2분 47초</td></tr>
-                <tr align="center"><td>03</td><td>Black Tesla</td><td>2분 20초</td></tr>
-                <tr align="center"><td>04</td><td>너의 모든 순간</td><td>4분 3초</td></tr>
-                <tr align="center"><td>05</td><td>supersonic</td><td>4분 44초</td></tr>
-            </table>
-        </div>
-
-        <div class="tracks-area">
-            <!-- 그리드(Grid)나 플렉스(Flex) 대신 노가다로 클래스를 번갈아 붙임 -->
-            <div class="track-item margin-right">
-                <img class="track-img" src="https://image.bugsm.co.kr/album/images/500/3350/335088.jpg">
-                <div style="color: #fff; margin-top: 10px;">01. USO</div>
-                <div>SID</div>
-            </div>
-            <div class="track-item">
-                <img class="track-img" src="https://image.bugsm.co.kr/album/images/500/206098/20609824.jpg">
-                <div style="color: #fff; margin-top: 10px;">02. Dash</div>
-                <div>NMIXX</div>
-            </div>
-            <div class="track-item margin-right">
-                <img class="track-img" src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/085/547/757/85547757_1724997320704_1_600x600.JPG">
-                <div style="color: #fff; margin-top: 10px;">03. Black Tesla</div>
-                <div>캔드비 블루</div>
-            </div>
-            <div class="track-item">
-                <img class="track-img" src="https://image.bugsm.co.kr/album/images/500/4132/413209.jpg">
-                <div style="color: #fff; margin-top: 10px;">04. 너의 모든 순간</div>
-                <div>성시경</div>
-            </div>
-            
-            <!-- 마지막 곡은 별도의 클래스를 줘서 억지로 가운데로 보냄 -->
-            <div class="track-item last-track">
-                <img class="track-img" src="https://image.yes24.com/momo/TopCate363/MidCate02/36217987.jpg">
-                <div style="color: #fff; margin-top: 10px;">05. supersonic</div>
-                <div>Oasis</div>
-            </div>
-        </div>
-        <!-- float 버그를 막기 위해 의미 없는 빈 태그를 끼워 넣음 -->
-        <div style="clear: both;"></div>
-    </div>
-
-    <div class="bottom-area">
-        <button class="btn">전곡 감상하기</button>
-    </div>
-</div>
+<footer>
+    <button type="button" class="listen-btn">전곡 감상하기</button>
+</footer>
 
 </body>
 </html>
