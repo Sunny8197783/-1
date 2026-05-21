@@ -1,148 +1,182 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Mess - It's a mEsS</title>
 <style>
-/* 전체적으로 촌스러운 원색 계열과 기본 글꼴(궁서/바탕) 사용 */
+/* CSS Reset (여백 초기화) 삭제 - 초보자는 이런걸 잘 모름 */
+
 body {
-  background-color: #0000ff; /* 눈 아픈 쨍한 파란색 */
-  color: yellow; /* 가독성 떨어지는 노란색 텍스트 */
-  font-family: "궁서", "바탕", serif; 
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+  url('https://i.pinimg.com/474x/14/1d/16/141d16cae092c1c776097b72aa589d7d.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #7fff00;
+  font-family: 'Share Tech Mono', monospace;
 }
 
-/* 세련된 그림자 효과 제거, 단순 밑줄과 빨간색 사용 */
 h1 {
-  color: red;
-  text-decoration: underline;
-  font-size: 35px;
-}
-
-/* 투박한 두께의 점선/실선 테두리 적용 */
-.section-box {
-  border: 5px dotted green;
-  background-color: white;
-  color: black;
-  margin: 15px;
-  padding: 10px;
+  font-size: 2.5rem;
+  text-shadow: 0 0 10px #952020;
+  font-family: 'Orbitron', sans-serif;
 }
 
 h2 {
-  background-color: yellow;
-  color: red;
-  border: 2px solid black;
+  border-bottom: 2px solid #7fff00;
+  text-shadow: 0 0 10px #952020;
 }
 
-/* 테이블의 세련된 선 정리(collapse) 제거, 투박한 입체감(outset/inset) 적용 */
-table {
-  border-collapse: separate;
-  border-spacing: 3px;
-  background-color: #cccccc;
+/* 반응형(max-width) 대신 절대값(800px) 사용, flex나 float 전부 제거 */
+.box {
+  width: 800px;
+  background: rgba(0,0,0,0.7);
+  border: 2px solid #7fff00;
+  padding: 25px;
+  text-align: left; /* center 태그 안에서 다시 왼쪽 정렬하기 위해 억지로 추가 */
 }
 
-th, td {
-  border: 2px solid black;
-  padding: 5px;
+.highlight {
+  font-weight: bold;
+  color: #7fff00;
 }
 
-/* 비율을 무시하고 width/height를 강제로 고정하여 이미지를 찌그러뜨림 */
-.track-img {
-  width: 150px;
-  height: 150px; 
-  border: 3px solid blue;
+/* 플레이리스트 테이블 원본 색상 유지, 단 border-collapse 등을 빼서 엉성하게 */
+.playlist-table {
+  background: #7fff00;
+  color: #000000;
+  width: 800px;
 }
 
-/* 마우스 오버 효과(hover), 부드러운 전환(transition) 모두 제거 */
-button {
-  background-color: #e0e0e0;
-  border: 3px outset #aaaaaa;
-  font-size: 20px;
-  padding: 10px;
-  cursor: pointer;
+.playlist-table th {
+  background: rgba(127,255,0,0.8);
+  font-size: 1.1rem;
 }
+
+/* 마우스 오버 효과는 간지를 위해 남겨둠 */
+.hover-item:hover {
+  box-shadow: 0 0 20px #7fff00;
+  background: rgba(127,255,0,0.1);
+}
+
+.listen-btn {
+  border: 1px solid #7fff00;
+  background: transparent;
+  color: #7fff00;
+  padding: 10px 30px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.listen-btn:hover {
+  background: #7fff00;
+  color: #000;
+  box-shadow: 0 0 20px #7fff00;
+  transition: 0.3s;
+}
+
+/* flexbox 대신 인라인 블록과 고정 너비로 앨범 배치 */
+.track {
+  display: inline-block;
+  width: 350px;
+  background: rgba(0,0,0,0.8);
+  border: 1px solid rgba(127,255,0,0.4);
+  padding: 15px;
+  text-align: center;
+  color: #fff;
+}
+
+/* object-fit을 빼고 html 속성으로 강제 리사이징 유도 */
 </style>
 </head>
 <body>
 
-<!-- 최신 레이아웃 태그 대신 구식 <center> 태그 남발 -->
+<!-- margin 대신 br 태그 남발, flex 대신 center 태그로 가운데 정렬 -->
+<br><br><br><br>
 <center>
-  <p>Mess</p>
+  <font color="#7fff00">Mess</font>
   <h1>EP 4집 'It's a mEsS'</h1>
-  <p>지들만의 매력으로 가득찬 플레이리스트</p>
+  <font color="#7fff00">지들만의 매력으로 가득찬 플레이리스트</font>
 </center>
+<br><br><br>
 
-<div class="section-box">
-  <center><h2>KILLING PART</h2></center>
-  <center>
-    <p>You need to find a way</p>
-    <!-- css 클래스 대신 인라인 스타일로 폰트 크기 강제 조절 -->
-    <p style="color: blue; font-size: 25px;"><b>For what you want to say,But before tomorrow</b></p>
-    <p>Cause my friend said he'd take you home</p>
-  </center>
-</div>
+<center>
+  <!-- 구역을 나누는 section 대신 그냥 div 박스 사용 -->
+  <div class="box">
+    <h2>KILLING PART</h2>
+    <br>
+    <center>
+      <font color="#fff">You need to find a way</font><br>
+      <font class="highlight">For what you want to say,But before tomorrow</font><br>
+      <font color="#fff">Cause my friend said he'd take you home</font>
+    </center>
+  </div>
+  <br><br>
 
-<div class="section-box">
-  <center><h2>POINT</h2></center>
-  <ul>
-    <li>아무 의미없이 라임만 맞춘 가사</li>
-    <li>마이웨이 마인드</li>
-  </ul>
-</div>
+  <div class="box">
+    <h2>POINT</h2>
+    <br>
+    <ul type="square"> <!-- list-style 대신 구식 속성 사용 -->
+      <li class="hover-item"><font color="#7fff00">아무 의미없이 라임만 맞춘 가사</font></li>
+      <li class="hover-item"><font color="#7fff00">마이웨이 마인드</font></li>
+    </ul>
+  </div>
+  <br><br>
 
-<div class="section-box">
-  <center><h2>PLAYLIST</h2></center>
-  
-  <center>
-    <!-- HTML 기본 border 속성 사용 -->
-    <table border="1">
+  <div class="box">
+    <h2>PLAYLIST</h2>
+    <br>
+    <!-- CSS를 제대로 못 다뤄서 HTML table 속성으로 테두리를 넣는 초보자 방식 -->
+    <table class="playlist-table" border="1" cellpadding="10" cellspacing="0">
       <tr>
         <th>Track</th>
         <th>곡명</th>
         <th>Time</th>
       </tr>
-      <tr><td>01</td><td>USO</td><td>1분 42초</td></tr>
-      <tr><td>02</td><td>Dash</td><td>2분 47초</td></tr>
-      <tr><td>03</td><td>Black Tesla</td><td>2분 20초</td></tr>
-      <tr><td>04</td><td>너의 모든 순간</td><td>4분 3초</td></tr>
-      <tr><td>05</td><td>supersonic</td><td>4분 44초</td></tr>
+      <tr class="hover-item" align="center"><td>01</td><td>USO</td><td>1분 42초</td></tr>
+      <tr class="hover-item" align="center"><td>02</td><td>Dash</td><td>2분 47초</td></tr>
+      <tr class="hover-item" align="center"><td>03</td><td>Black Tesla</td><td>2분 20초</td></tr>
+      <tr class="hover-item" align="center"><td>04</td><td>너의 모든 순간</td><td>4분 3초</td></tr>
+      <tr class="hover-item" align="center"><td>05</td><td>supersonic</td><td>4분 44초</td></tr>
     </table>
-  </center>
+    
+    <br><br>
 
-  <br><br><br> <!-- 여백을 <br> 태그 여러 개로 해결하는 초보자 특성 반영 -->
-
-  <center>
-    <!-- Flexbox나 Grid를 전혀 쓰지 않고 <br>로만 줄바꿈 처리 -->
-    <div>
-      <img class="track-img" src="https://image.bugsm.co.kr/album/images/500/3350/335088.jpg"><br>
-      <b>01. USO</b><br>SID
+    <!-- Flex Grid 대신 그냥 가로로 이어 붙이기 + br 태그로 줄바꿈 -->
+    <div class="track hover-item">
+      <!-- 이미지 원본 비율 무시하고 억지로 사이즈 맞추기 -->
+      <img src="https://image.bugsm.co.kr/album/images/500/3350/335088.jpg" width="300" height="180">
+      <br><br>01. USO<br><font color="#7fff00">SID</font>
+    </div>
+    &nbsp;&nbsp; <!-- 띄어쓰기 특수기호로 억지 여백 주기 -->
+    <div class="track hover-item">
+      <img src="https://image.bugsm.co.kr/album/images/500/206098/20609824.jpg" width="300" height="180">
+      <br><br>02. Dash<br><font color="#7fff00">NMIXX</font>
     </div>
     <br><br>
-    <div>
-      <img class="track-img" src="https://image.bugsm.co.kr/album/images/500/206098/20609824.jpg"><br>
-      <b>02. Dash</b><br>NMIXX
+    <div class="track hover-item">
+      <img src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/085/547/757/85547757_1724997320704_1_600x600.JPG" width="300" height="180">
+      <br><br>03. Black Tesla<br><font color="#7fff00">캔드비 블루</font>
+    </div>
+    &nbsp;&nbsp;
+    <div class="track hover-item">
+      <img src="https://image.bugsm.co.kr/album/images/500/4132/413209.jpg" width="300" height="180">
+      <br><br>04. 너의 모든 순간<br><font color="#7fff00">성시경</font>
     </div>
     <br><br>
-    <div>
-      <img class="track-img" src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/085/547/757/85547757_1724997320704_1_600x600.JPG"><br>
-      <b>03. Black Tesla</b><br>캔드비 블루
+    <!-- 마지막 곡 하나 남은거 정렬하는 법을 몰라서 그냥 하나만 달랑 놓음 -->
+    <div class="track hover-item">
+      <img src="https://image.yes24.com/momo/TopCate363/MidCate02/36217987.jpg" width="300" height="180">
+      <br><br>05. supersonic<br><font color="#7fff00">Oasis</font>
     </div>
-    <br><br>
-    <div>
-      <img class="track-img" src="https://image.bugsm.co.kr/album/images/500/4132/413209.jpg"><br>
-      <b>04. 너의 모든 순간</b><br>성시경
-    </div>
-    <br><br>
-    <div>
-      <img class="track-img" src="https://image.yes24.com/momo/TopCate363/MidCate02/36217987.jpg"><br>
-      <b>05. supersonic</b><br>Oasis
-    </div>
-  </center>
-</div>
-
-<br><br>
-<center>
-  <button type="button">전곡 감상하기</button>
+  </div>
 </center>
+
+<br><br><br>
+<center>
+  <button type="button" class="listen-btn">전곡 감상하기</button>
+</center>
+<br><br>
 
 </body>
 </html>
